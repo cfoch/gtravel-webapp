@@ -1,0 +1,63 @@
+Currently the models.png file contains a draft of the database of gtravel-webapp. Here is the explanation of some fields.
+
+****Nota para el grupo: he eliminado algunas tablas porque django tiene una caracteristica que le llaman 'choices'. En vez de usar estas tablas, simplemente lo manejamos de esta manera (django actuaria como una base de datos). A continuacion detallo como se alojarian estos elementos (el primer elemento de cada subtupla viene a ser el valor que se guardaria en la base de datos--esto puede ser un numero 1, 2, 3, 4 o cadenas 'a1', 'a2', 'a3'--; el segundo es  visible por los humanos)***********
+
+Table.field
+
+Users.membership_status
+MEMBERSHIP_STATUS_CHOICES = (
+    (MEMBER, 'Member'),
+    (PENDING_MEMBER, 'Pending member'),
+    (EMERITUS, 'Emeritus'),
+    (NOT_MEMBER, 'Not a member'),
+)
+
+
+Events.event_type 
+EVENT_TYPE= (
+    (SMALL, 'Small event'),
+    (Large, 'Large event')
+)
+
+
+Application.role
+ROLE_CHOICES = (
+    (PARTICIPANT, 'Participant'),
+    (SPEAKER, 'Speaker'),
+    (ORGANIZER, 'Organizer'),
+    (OTHER, 'Other'),
+)
+
+Application.status
+STATUS_CHOICES = (
+    (PENDING, 'pending'),
+    (SPONSORSHIP_OFFERED, 'sponsorship offered'),
+    (AWAITING_RECEIPTS, 'awaiting receipts'),
+    (PAYMENT_INSTRUCTED, 'payment instructed'),
+    (PAYMENT_SENT, 'payment sent'),
+    (COMPLETED, 'completed'),
+)
+
+Application.gnome_project 
+
+GNOME_PROJECT_CHOICES = (
+    (1, 'pitivi'),
+    (2, 'gnome-shell'),
+    (3, 'epiphany'),
+    ...
+    (n, 'some-other-project),
+)
+
+
+Application.
+
+
+Users.usertype???
+USERTYPE_CHOICES = (
+    (BOARD, 'Board'),
+    (TRAVEL_COMMITTEE, 'Travel committee'),
+    (ADMINISTRATIVE_ASSISTANT, 'Administrative assistant'),
+    (APPLICANT, 'Applicant'),
+)
+
+
