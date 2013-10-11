@@ -10,6 +10,7 @@ class Application(models.Model):
         (3, 'payment instructed'),
         (4, 'payment sent'),
         (5, 'completed'),
+        (6, 'withdrawn'),
     )
 
     MEMBERSHIP_STATUS = (
@@ -17,6 +18,13 @@ class Application(models.Model):
         (1, 'Pending'),
         (2, 'Emeritus'),
         (3, 'No'),
+    )
+
+    REIMBURSEMENT_TYPE = (
+        (0, 'Check'),
+        (1, 'Paypal'),
+        (2, 'Bank transfer'),
+        (3, 'Cash'),
     )
 
     id_user = models.ForeignKey(User)
@@ -36,10 +44,21 @@ class Application(models.Model):
     requested_subsidy_total = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     reimbursement_amount = models.DecimalField(default=0, max_digits=8, decimal_places=2, null=True)
     status = models.IntegerField(max_length=1, choices=STATUS, null=True)
+    reimbursement_type = models.IntegerField(max_length=1, choices=REIMBURSEMENT_TYPE)
+
+
+class Negotiation(models.Model):
+    answer_to = models.OneToOneField('self', null=True)
+    id_application = models.ForeignKey(Application)
+    #id_usertype = models.ForeignKey(UserType)
+    approved = models.NullBooleanField()
+    reason = models.TextField()
+    amount = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    date = models.DateField()
+    
 
 class GnomeProjects(models.Model):
     gnome_project = models.CharField(max_length=50)
-
 
 class ProjectsPerApplication(models.Model):
     id_application = models.ForeignKey(Application)
@@ -63,22 +82,8 @@ class Receipts(models.Model):
     id_application = models.ForeignKey(Application)
     receipt = models.FileField(upload_to="receipts/%Y/%M")
 
-
-class Reimbursement(models.Model):
-    REIMBURSEMENT_TYPE = (
-        (0, 'Check'),
-        (1, 'Paypal'),
-        (2, 'Bank transfer'),
-        (3, 'Cash'),
-    )
-    
-    #Or should everything go in this class? (BankTrasnfer, Check and Paypal)
-    id_application = models.ForeignKey(Application)
-    reimbursement_type = models.IntegerField(max_length=1, choices=REIMBURSEMENT_TYPE)
-
-
 class BankTransfer(models.Model):
-    id_reimbursement = models.OneToOneField(Reimbursement)
+    id_application = models.OneToOneField(Application)
     holder_firstname = models.CharField(max_length=50)
     holder_lastname = models.CharField(max_length=50)
     holder_address = models.CharField(max_length=100)
@@ -92,11 +97,11 @@ class BankTransfer(models.Model):
 
 
 class PayPal(models.Model):
-    id_reimbursement = models.OneToOneField(Reimbursement)
+    id_application = models.OneToOneField(Application)
     account = models.EmailField()
     currency = models.CharField(max_length=3)
 
 class Check(models.Model):
-    id_reimbursement = models.OneToOneField(Reimbursement)
+    id_application = models.OneToOneField(Application)
     account = models.CharField(max_length=30)
     address = models.CharField(max_length=100)    
