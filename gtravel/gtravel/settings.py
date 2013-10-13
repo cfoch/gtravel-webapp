@@ -1,5 +1,7 @@
 # Django settings for gtravel project.
 
+#AUTH_USER_MODEL = 'userprofile.MyUser'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -124,6 +126,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'applications',
+    'userprofile',
+    'events',
 )
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'

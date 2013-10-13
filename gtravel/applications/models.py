@@ -27,33 +27,86 @@ class Application(models.Model):
         (3, 'Cash'),
     )
 
-    id_user = models.ForeignKey(User)
+    #id_user = models.ForeignKey(User)
     #id_event = models.Foreignkey(Event)
-    employment = models.CharField(max_length=50, null=True)
-    membership_status = models.IntegerField(max_length=1, choices=MEMBERSHIP_STATUS)
-    date_of_arrival = models.DateField()
-    date_of_departure = models.DateField()
-    statement_of_interest = models.TextField()
-    years_using_gnome = models.IntegerField()
-    travel_costs = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    employment = models.CharField(
+        verbose_name="Employement",
+        max_length=50,
+        null=True
+    )
+    membership_status = models.IntegerField(
+        verbose_name="Membership status",
+        max_length=1,
+        choices=MEMBERSHIP_STATUS
+    )
+    date_of_arrival = models.DateField(
+        verbose_name="Date of arrival"
+    )
+    date_of_departure = models.DateField(
+        verbose_name="Date of departure"        
+    )
+    statement_of_interest = models.TextField(
+        verbose_name="Statement of interest"
+    )
+    years_using_gnome = models.IntegerField(
+        verbose_name="Year using GNOME",
+        max_length=2
+    )
+    travel_costs = models.DecimalField(
+        verbose_name="Travel costs",
+        default=0,
+        max_digits=8,
+        decimal_places=2
+    )
     travel_costs_description = models.TextField()
-    lodging_costs = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    lodging_costs = models.DecimalField(
+        default=0,
+        max_digits=8,
+        decimal_places=2
+    )
     lodging_costs_description = models.TextField()
-    other_costs = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    other_costs = models.DecimalField(
+        default=0,
+        max_digits=8,
+        decimal_places=2
+    )
     other_costs_description = models.TextField()
-    requested_subsidy_total = models.DecimalField(default=0, max_digits=8, decimal_places=2)
-    reimbursement_amount = models.DecimalField(default=0, max_digits=8, decimal_places=2, null=True)
-    status = models.IntegerField(max_length=1, choices=STATUS, null=True)
-    reimbursement_type = models.IntegerField(max_length=1, choices=REIMBURSEMENT_TYPE)
+    requested_subsidy_total = models.DecimalField(
+        default=0,
+        max_digits=8,
+        decimal_places=2
+    )
+    reimbursement_amount = models.DecimalField(
+        default=0,
+        max_digits=8,
+        decimal_places=2,
+        null=True
+    )
+    status = models.IntegerField(
+        max_length=1,
+        choices=STATUS,
+        null=True
+    )
+    reimbursement_type = models.IntegerField(
+        max_length=1,
+        choices=REIMBURSEMENT_TYPE
+    )
 
 
 class Negotiation(models.Model):
-    answer_to = models.OneToOneField('self', null=True)
+    answer_to = models.OneToOneField(
+        'self',
+        null=True
+    )
     id_application = models.ForeignKey(Application)
     #id_usertype = models.ForeignKey(UserType)
     approved = models.NullBooleanField()
     reason = models.TextField()
-    amount = models.DecimalField(default=0, max_digits=8, decimal_places=2)
+    amount = models.DecimalField(
+        default=0,
+        max_digits=8,
+        decimal_places=2
+    )
     date = models.DateField()
     
 
@@ -63,7 +116,10 @@ class GnomeProjects(models.Model):
 class ProjectsPerApplication(models.Model):
     id_application = models.ForeignKey(Application)
     id_gnome_project = models.ForeignKey(GnomeProjects)
-    other_gnome_project = models.CharField(max_length=50, null=True)
+    other_gnome_project = models.CharField(
+        max_length=50,
+        null=True
+    )
 
 
 class RolesPerApplication(models.Model):
@@ -74,8 +130,14 @@ class RolesPerApplication(models.Model):
         (3, 'Other'),
     )
     id_application = models.ForeignKey(Application)
-    role = models.IntegerField(max_length=1, choices=ROLES)
-    other_role = models.CharField(max_length=50, null=True)
+    role = models.IntegerField(
+        max_length=1,
+        choices=ROLES
+    )
+    other_role = models.CharField(
+        max_length=50,
+        null=True
+    )
 
 
 class Receipts(models.Model):
@@ -87,10 +149,22 @@ class BankTransfer(models.Model):
     holder_firstname = models.CharField(max_length=50)
     holder_lastname = models.CharField(max_length=50)
     holder_address = models.CharField(max_length=100)
-    iban = models.CharField(max_length=30, null=True)
-    account = models.CharField(max_length=30, null=True)
-    swift = models.CharField(max_length=30, null=True)
-    bic = models.CharField(max_length=30, null=True)
+    iban = models.CharField(
+        max_length=30,
+        null=True
+    )
+    account = models.CharField(
+        max_length=30,
+        null=True
+    )
+    swift = models.CharField(
+        max_length=30,
+        null=True
+    )
+    bic = models.CharField(
+        max_length=30,
+        null=True
+    )
     bank_name = models.CharField(max_length=100)
     bank_address = models.CharField(max_length=200)
     currency = models.CharField(max_length=3)
