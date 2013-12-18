@@ -1,6 +1,7 @@
 from django.db import models
+from datetime import date
 
-class Events(models.Model):
+class Event(models.Model):
     EVENT_TYPE = (
         ('Small Event', (
             (1, 'Hackfest'),
@@ -22,3 +23,14 @@ class Events(models.Model):
     #city = models.CharField(30)
     budget = models.DecimalField(max_digits=8, decimal_places=2)
     event_type = models.IntegerField(max_length=1, choices=EVENT_TYPE)
+
+    def upcoming(self):
+        return self.start_date > date.today()
+
+    def __unicode__(self):
+        items = {
+            "id": self.id,
+            "event_name": self.event_name
+        }
+        return "Event #%(id)d - %(event_name)s" % items
+

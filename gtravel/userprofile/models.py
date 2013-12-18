@@ -1,8 +1,7 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
 
-
-class Persona(AbstractBaseUser):
+class Persona(AbstractUser):
     #FIXME: Is there a better field for phone numbers?
     #Check: https://github.com/stefanfoulis/django-phonenumber-field
     phone_number = models.CharField(
@@ -33,3 +32,4 @@ class Persona(AbstractBaseUser):
         verbose_name="Google+ Profile",
         null=True
     )
+

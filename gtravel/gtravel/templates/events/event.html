@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+  <header>
+    <h2><a href="#">{{ event.event_name }}</a></h2>
+  </header>
+  {{ event.description }}
+  <footer>
+  {% if user.is_authenticated %}
+    <a href="#">Apply</a>
+  {% endif %}
+  </footer>
+</article>
+{% endblock %}

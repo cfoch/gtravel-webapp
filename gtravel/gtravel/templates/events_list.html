@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block events_list %}
+
+{% if events.count > 0 %}
+    {% for event in events %}
+        <div>
+        <h2><a href="#">{{ event.event_name }}</a></h2>
+        <p>{{ event.description }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No events available</p>
+{% endif %}
+
+{% endblock %}
+

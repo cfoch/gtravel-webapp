@@ -1,6 +1,21 @@
 from django.db import models
-from django.contrib.auth.models import User
 
+from events.models import Event
+from userprofile.models import Persona
+
+
+class GnomeProject(models.Model):
+    gnome_project = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.gnome_project
+
+class Role(models.Model):
+    role = models.CharField(max_length=30)
+    is_default = models.BooleanField()
+
+    def __unicode__(self):
+        return self.role
 
 class Application(models.Model):
     STATUS = (
@@ -27,17 +42,26 @@ class Application(models.Model):
         (3, 'Cash'),
     )
 
-    #id_user = models.ForeignKey(User)
-    #id_event = models.Foreignkey(Event)
+    user = models.ForeignKey(Persona)
     employment = models.CharField(
         verbose_name="Employement",
         max_length=50,
+        null=True
+    )
+    gnome_projects = models.ManyToManyField(
+        GnomeProject,
+        verbose_name="GNOME Project",
         null=True
     )
     membership_status = models.IntegerField(
         verbose_name="Membership status",
         max_length=1,
         choices=MEMBERSHIP_STATUS
+    )
+    event = models.ForeignKey(Event)
+    roles = models.ManyToManyField(
+        Role,
+        limit_choices_to={'is_default': True}
     )
     date_of_arrival = models.DateField(
         verbose_name="Date of arrival"
@@ -49,7 +73,7 @@ class Application(models.Model):
         verbose_name="Statement of interest"
     )
     years_using_gnome = models.IntegerField(
-        verbose_name="Year using GNOME",
+        verbose_name="Number of years using GNOME",
         max_length=2
     )
     travel_costs = models.DecimalField(
@@ -58,40 +82,53 @@ class Application(models.Model):
         max_digits=8,
         decimal_places=2
     )
-    travel_costs_description = models.TextField()
+    travel_costs_description = models.TextField(
+        verbose_name="Travel costs description"
+    )
     lodging_costs = models.DecimalField(
+        verbose_name="Lodging costs",
         default=0,
         max_digits=8,
         decimal_places=2
     )
-    lodging_costs_description = models.TextField()
+    lodging_costs_description = models.TextField(
+        verbose_name="Lodging costs",
+    )
     other_costs = models.DecimalField(
+        verbose_name="Other costs",
         default=0,
         max_digits=8,
         decimal_places=2
     )
-    other_costs_description = models.TextField()
+    other_costs_description = models.TextField(
+        verbose_name="Other costs description"
+    )
     requested_subsidy_total = models.DecimalField(
+        verbose_name="Requested subsidy total",
+        help_text="This is the amount you would like covered by" \
+            "the GNOME Foundation",
         default=0,
         max_digits=8,
         decimal_places=2
     )
     reimbursement_amount = models.DecimalField(
+        verbose_name="Reimbursement amount",
         default=0,
         max_digits=8,
         decimal_places=2,
         null=True
     )
     status = models.IntegerField(
+        verbose_name="Application status",
         max_length=1,
         choices=STATUS,
         null=True
     )
     reimbursement_type = models.IntegerField(
+        verbose_name="Reimbursement type",
         max_length=1,
         choices=REIMBURSEMENT_TYPE
     )
-
 
 class Negotiation(models.Model):
     answer_to = models.OneToOneField(
@@ -108,19 +145,14 @@ class Negotiation(models.Model):
         decimal_places=2
     )
     date = models.DateField()
-    
-
-class GnomeProjects(models.Model):
-    gnome_project = models.CharField(max_length=50)
 
 class ProjectsPerApplication(models.Model):
     id_application = models.ForeignKey(Application)
-    id_gnome_project = models.ForeignKey(GnomeProjects)
+    id_gnome_project = models.ForeignKey(GnomeProject)
     other_gnome_project = models.CharField(
         max_length=50,
         null=True
     )
-
 
 class RolesPerApplication(models.Model):
     ROLES = (
@@ -178,4 +210,5 @@ class PayPal(models.Model):
 class Check(models.Model):
     id_application = models.OneToOneField(Application)
     account = models.CharField(max_length=30)
-    address = models.CharField(max_length=100)    
+    address = models.CharField(max_length=100)
+
