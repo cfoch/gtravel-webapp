@@ -1,4 +1,5 @@
 from django.db import models
+from django_iban.fields import IBANField, SWIFTBICField
 
 from events.models import Event
 from userprofile.models import Persona
@@ -130,13 +131,19 @@ class Application(models.Model):
         choices=REIMBURSEMENT_TYPE
     )
 
+    class Meta:
+        unique_together = (("user", "event"), )
+    
+    def __unicode__(self):
+        return "Application" + str(self.id)
+
 class Negotiation(models.Model):
     answer_to = models.OneToOneField(
         'self',
         null=True
     )
     id_application = models.ForeignKey(Application)
-    #id_usertype = models.ForeignKey(UserType)
+    group = models.ForeignKey('auth.Group')
     approved = models.NullBooleanField()
     reason = models.TextField()
     amount = models.DecimalField(
@@ -147,8 +154,8 @@ class Negotiation(models.Model):
     date = models.DateField()
 
 class ProjectsPerApplication(models.Model):
-    id_application = models.ForeignKey(Application)
-    id_gnome_project = models.ForeignKey(GnomeProject)
+    application = models.ForeignKey(Application)
+    gnome_project = models.ForeignKey(GnomeProject)
     other_gnome_project = models.CharField(
         max_length=50,
         null=True
@@ -161,7 +168,7 @@ class RolesPerApplication(models.Model):
         (2, 'Organizer'),
         (3, 'Other'),
     )
-    id_application = models.ForeignKey(Application)
+    application = models.ForeignKey(Application)
     role = models.IntegerField(
         max_length=1,
         choices=ROLES
@@ -173,42 +180,32 @@ class RolesPerApplication(models.Model):
 
 
 class Receipts(models.Model):
-    id_application = models.ForeignKey(Application)
+    application = models.ForeignKey(Application)
     receipt = models.FileField(upload_to="receipts/%Y/%M")
 
 class BankTransfer(models.Model):
-    id_application = models.OneToOneField(Application)
+    application = models.OneToOneField(Application)
     holder_firstname = models.CharField(max_length=50)
     holder_lastname = models.CharField(max_length=50)
     holder_address = models.CharField(max_length=100)
-    iban = models.CharField(
-        max_length=30,
-        null=True
-    )
+    iban = IBANField(null=True)
     account = models.CharField(
         max_length=30,
         null=True
     )
-    swift = models.CharField(
-        max_length=30,
-        null=True
-    )
-    bic = models.CharField(
-        max_length=30,
-        null=True
-    )
+    swift_bic = SWIFTBICField(null=True)
     bank_name = models.CharField(max_length=100)
     bank_address = models.CharField(max_length=200)
     currency = models.CharField(max_length=3)
 
 
 class PayPal(models.Model):
-    id_application = models.OneToOneField(Application)
+    application = models.OneToOneField(Application)
     account = models.EmailField()
     currency = models.CharField(max_length=3)
 
 class Check(models.Model):
-    id_application = models.OneToOneField(Application)
+    application = models.OneToOneField(Application)
     account = models.CharField(max_length=30)
     address = models.CharField(max_length=100)
-
+    

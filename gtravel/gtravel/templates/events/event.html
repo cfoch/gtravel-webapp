@@ -5,11 +5,13 @@
   <header>
     <h2><a href="#">{{ event.event_name }}</a></h2>
   </header>
-  {{ event.description }}
-  <footer>
-  {% if user.is_authenticated %}
-    <a href="#">Apply</a>
+  <p>{{ event.description }}</p>
+  {% if is_applicant_user  %}
+      {% if not already_applied %}
+          {% include "applications/application_form.html" %}
+      {% else %}
+          {% include "applications/application_detail.html" %}
+      {% endif %}
   {% endif %}
-  </footer>
 </article>
 {% endblock %}
