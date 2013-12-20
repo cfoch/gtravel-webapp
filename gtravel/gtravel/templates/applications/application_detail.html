@@ -1,0 +1,84 @@
+{# MAKE ME SIMPLE !!! #}
+<table border=1>
+  <tr>
+    <td>Employment:</td>
+    <td>{{ application.employment }}</td>
+  </tr>
+  <tr>
+    <td>GNOME Project(s): </td>
+    <td>
+      <ul>
+      {% for gnome_project in application.gnome_projects.all %}
+          <li>{{ gnome_project }}</li>
+      {% endfor %}
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>Membership status: </td>
+    <td>{{ application.get_membership_status_display }}</td>
+  </tr>
+  <tr>
+    <td>Role(s): </td>
+    <td>
+      {% for role in application.roles.all %}
+          <li>{{ role }}</li>
+      {% endfor %}
+    </td>
+  </tr>
+  <tr>
+    <td>Date of arrival: </td>
+    <td>{{ application.date_of_arrival}}</td>
+  </tr>
+  <tr>
+    <td>Date of departure: </td>
+    <td>{{ application.date_of_departure }}</td>
+  </tr>
+  <tr>
+    <td>Statement of interest: </td>
+    <td>{{ application.statement_of_interest }}</td>
+  </tr>
+  <tr>
+    <td>Number of years using GNOME: </td>
+    <td>{{ application.years_using_gnome }}</td>
+  </tr>
+  <tr>
+    <td>Statement of interest: </td>
+    <td>{{ application.statement_of_interest }}</td>
+  </tr>
+  <tr>
+    <td>Travel costs: </td>
+    <td>{{ application.travel_costs }}</td>
+  </tr>
+  <tr>
+    <td>Travel costs description: </td>
+    <td>{{ application.travel_costs_description }}</td>
+  </tr>
+  <tr>
+    <td>Lodging costs: </td>
+    <td>{{ application.lodging_costs }}</td>
+  </tr>
+  <tr>
+    <td>Lodging costs description: </td>
+    <td>{{ application.lodging_costs_description }}</td>
+  </tr>
+  <tr>
+    <td>Other costs: </td>
+    <td>{{ application.other_costs_description }}</td>
+  </tr>
+  <tr>
+    <td>Other costs description: </td>
+    <td>{{ application.other_costs_description }}</td>
+  </tr>
+  <tr>
+    <td>Requested subsidy total: </td>
+    <td>{{ application.requested_subsidy_total }}</td>
+  </tr>
+  <tr>
+    <td>Reimbursement type: </td>
+    <td>{{ application.reimbursement_type }}</td>
+  </tr>
+
+
+
+</table>
