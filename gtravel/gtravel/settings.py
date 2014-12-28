@@ -2,6 +2,8 @@
 import os
 PROJECT_PATH = os.path.dirname(os.path.realpath(__file__))
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 AUTH_USER_MODEL = 'userprofile.Persona'
 
 DEBUG = True
@@ -129,6 +131,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'app',
     'applications',
     'userprofile',
     'events',

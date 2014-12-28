@@ -2,15 +2,22 @@ from django.db import models
 from datetime import date
 
 class Event(models.Model):
+
+    (SMALL_EVENT_HACKFEST,
+    SMALL_EVENT_OTHER,
+    LARGE_EVENT_GUADEC,
+    LARGE_EVENT_GNOME_ASIA,
+    LARGE_EVENT_OTHER) = range(5)
+
     EVENT_TYPE = (
         ('Small Event', (
-            (1, 'Hackfest'),
-            (2, 'Other'),
+            (SMALL_EVENT_HACKFEST, 'Hackfest'),
+            (SMALL_EVENT_OTHER, 'Other'),
         )),
         ('Large Event', (
-            (3, 'GUADEC'),
-            (4, 'GNOME.ASIA'),
-            (5, 'Other'),
+            (LARGE_EVENT_GUADEC, 'GUADEC'),
+            (LARGE_EVENT_GNOME_ASIA, 'GNOME.ASIA'),
+            (LARGE_EVENT_OTHER, 'Other'),
         )),
     )
 

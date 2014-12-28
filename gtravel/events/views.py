@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from applications.views import manage_application
 from events.models import Event
-#from applications.models import Application, PayPal, BankTransfer
+from applications.models import Application, PayPal, BankTransfer
 from applications.forms import ApplicationForm
 
 from utils import is_applicant

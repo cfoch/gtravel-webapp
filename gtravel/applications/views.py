@@ -9,7 +9,7 @@ from applications.forms import ApplicationForm
 
 
 #@user_passes_test(lambda u: u.groups.filter(name='applicant').count() > 0)
-def manage_application(request, event):
+def manage_application(request, event_id):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
         if form.is_valid():

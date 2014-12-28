@@ -140,6 +140,7 @@ class Application(models.Model):
 class Negotiation(models.Model):
     answer_to = models.OneToOneField(
         'self',
+        related_name='+',
         null=True
     )
     id_application = models.ForeignKey(Application)
@@ -184,7 +185,7 @@ class Receipts(models.Model):
     receipt = models.FileField(upload_to="receipts/%Y/%M")
 
 class BankTransfer(models.Model):
-    application = models.OneToOneField(Application)
+    application = models.OneToOneField(Application, related_name='+')
     holder_firstname = models.CharField(max_length=50)
     holder_lastname = models.CharField(max_length=50)
     holder_address = models.CharField(max_length=100)
@@ -200,12 +201,12 @@ class BankTransfer(models.Model):
 
 
 class PayPal(models.Model):
-    application = models.OneToOneField(Application)
+    application = models.OneToOneField(Application, related_name='+')
     account = models.EmailField()
     currency = models.CharField(max_length=3)
 
 class Check(models.Model):
-    application = models.OneToOneField(Application)
+    application = models.OneToOneField(Application, related_name='+')
     account = models.CharField(max_length=30)
     address = models.CharField(max_length=100)
     

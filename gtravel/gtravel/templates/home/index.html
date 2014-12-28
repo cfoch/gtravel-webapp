@@ -8,13 +8,22 @@
           {% if event.upcoming %}
             <article>
               <header>
-                <h2><a href="/events/{{ event.id }}">{{ event.event_name }}</a></h2>
+                <a href="/events/{{ event.id }}">{{ event.event_name }}</a>
               </header>
               {{ event.description }}
               <footer>
-                {% if user.is_authenticated %}
-                  <a href="#">Apply</a>
-                {% endif %}
+                  <nav>
+                    <ul>
+                      <li>
+                        {% if user.is_authenticated %}
+                          <a href="/events/{{ event.id }}/apply">Apply</a>
+                        {% endif %}
+                      </li>
+                      <li>Applications deadline: {{ event.applications_deadline|date:"M d, Y" }}</li>
+                    </ul>
+                  </nav>
+
+
               </footer>
             </article>
           {% endif %}
