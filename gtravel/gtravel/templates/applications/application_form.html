@@ -1,7 +1,18 @@
-<form method="post" action="">
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row" style="margin-top:20px;">
+    <div class="col-sm-9 ">
+    <form class="form-horizontal" method="post" action="">
+    
     {% csrf_token %}
     {% for field in form %}
         <p>{{ field.label_tag }} {{ field }} </p>
     {% endfor %}
-    <input type="submit"/>
+    <input class="btn btn-primary btn-sm" type="submit"/>
 </form>
+    </div>
+
+</div>
+
+{% endblock %}

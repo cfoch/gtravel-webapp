@@ -2,14 +2,18 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from userprofile.forms import SignUpForm
-
+from home.forms import LoginForm
 
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            print "Is valid"
+            print ("Is valid")
             form.save()
+            form = LoginForm()
+            ctx = {'form': form, 'message': ''}
+            return render_to_response('home/login.html', ctx,
+                context_instance=RequestContext(request))
     else:
         form = SignUpForm()
     return render_to_response("home/signup.html", 

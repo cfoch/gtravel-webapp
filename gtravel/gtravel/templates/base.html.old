@@ -1,0 +1,27 @@
+<html>
+<head>
+</head>
+<body>
+  <header>
+    <h1>gtravel-webapp</h1><br>
+    <nav>
+      <ul>
+        <li><a href="/home/">HOME</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="/logout/">LOG-OUT</a></li>
+        {% else %}
+          <li><a href="/login/">LOG-IN</a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+  </header>
+  <section>
+    <p>Welcome to GNOME Travel Application</p>
+  </section>
+  <section id="content">
+    {% block content %}
+    {% endblock %}
+  </section>
+</body>
+</html>

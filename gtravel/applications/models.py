@@ -13,7 +13,7 @@ class GnomeProject(models.Model):
 
 class Role(models.Model):
     role = models.CharField(max_length=30)
-    is_default = models.BooleanField()
+    is_default = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.role
