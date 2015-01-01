@@ -8,7 +8,6 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            print "Is valid"
             form.save()
     else:
         form = SignUpForm()

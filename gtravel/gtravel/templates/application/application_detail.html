@@ -9,7 +9,7 @@
     <td>
       <ul>
       {% for gnome_project in application.gnome_projects.all %}
-          <li>{{ gnome_project }}</li>
+          <li>{{ gnome_project.gnome_project }}</li>
       {% endfor %}
       </ul>
     </td>

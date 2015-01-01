@@ -29,6 +29,11 @@ class Application(models.Model):
         (6, 'withdrawn'),
     )
 
+    (MEMBERSHIP_STATUS_YES,
+    MEMBERSHIP_STATUS_PENDING,
+    MEMBERSHIP_STATUS_EMERITUS,
+    MEMBERSHIP_STATUS_NO) = range(4)
+
     MEMBERSHIP_STATUS = (
         (0, 'Yes'),
         (1, 'Pending'),
@@ -161,7 +166,7 @@ class ProjectsPerApplication(models.Model):
         max_length=50,
         null=True
     )
-
+"""
 class RolesPerApplication(models.Model):
     ROLES = (
         (0, 'Participant'),
@@ -178,7 +183,7 @@ class RolesPerApplication(models.Model):
         max_length=50,
         null=True
     )
-
+"""
 
 class Receipts(models.Model):
     application = models.ForeignKey(Application)

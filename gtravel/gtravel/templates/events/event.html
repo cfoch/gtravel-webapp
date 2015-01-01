@@ -6,12 +6,14 @@
     <h2><a href="#">{{ event.event_name }}</a></h2>
   </header>
   <p>{{ event.description }}</p>
+
   {% if is_applicant_user  %}
       {% if not already_applied %}
-          {% include "applications/application_form.html" %}
+          {% include "application/application_form.html" %}
       {% else %}
-          {% include "applications/application_detail.html" %}
+          {% include "application/application_detail.html" %}
       {% endif %}
   {% endif %}
+
 </article>
 {% endblock %}
