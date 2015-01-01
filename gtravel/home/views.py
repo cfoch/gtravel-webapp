@@ -31,7 +31,7 @@ def login_view(request):
                     login(request, user)
                     return HttpResponseRedirect('/home/')
                 else:
-                    message = "User and/or passwordd invalid"
+                    message = "User and/or password invalid"
         form = LoginForm()
         ctx = {'form': form, 'message': message}
         return render_to_response('home/login.html', ctx,

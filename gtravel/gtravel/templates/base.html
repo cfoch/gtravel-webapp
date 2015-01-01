@@ -1,27 +1,87 @@
+
 <html>
+
+<!-- Good morning, GNOME -->
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> GNOME Travel</title>
+        <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/bootstrap-theme.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/style.css" />
+        <link rel="stylesheet" type="text/css" media="all" href="{{STATIC_URL}}css/layout.css" />
+
+
+    <link rel="icon" type="image/png" href="{{STATIC_URL}}images/favicon.png" />
+    <script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}js/bootstrap.js"></script>
+
 </head>
+
 <body>
-  <header>
-    <h1>gtravel-webapp</h1><br>
-    <nav>
-      <ul>
-        <li><a href="/home/">HOME</a></li>
-        {% if user.is_authenticated %}
-          <li><a href="/logout/">LOG-OUT</a></li>
-        {% else %}
-          <li><a href="/signup/">SIGN-UP</a></li>
-          <li><a href="/login/">LOG-IN</a></li>
-        {% endif %}
-      </ul>
-    </nav>
-  </header>
-  <section>
-    <p>Welcome to GNOME Travel Application</p>
-  </section>
-  <section id="content">
-    {% block content %}
-    {% endblock %}
-  </section>
+<div id="container">
+      <div id="header">
+        <!-- global gnome.org domain bar -->
+        <div id="global_domain_bar">
+          <div id="header_tabs">
+            <div id="user_tab" class="tab">
+                <ul id="username">
+                    <li><span id="pagelocation"><a href="/home">Home</a></span></li>
+                    <li><a href="#"><span>Events</span></a></li>
+                    {% if user.is_authenticated %}
+                   
+                        <li><a href="#" id="applications"><span>Applications</span></a></li>
+                        <li><a href="#" id="userhome" title=" {{user}} @ Self"> {{user}}</a></li>
+                        <li><a href="#" id="userprefs" rel="nofollow">Settings</a></li>
+                        <li><a href="/logout/" id="logout" rel="nofollow">Logout</a></li>
+                    {% else %}
+                        <li><a href="/signup/">Signup</a> | <a href="/login/">Login</a></li>
+                    {% endif %}
+        
+                    
+                </ul>
+            </div>
+            <div id="site_tab" class="tab">
+              <a class="root" href="https://www.gnome.org/">GNOME.org</a>
+            </div>
+          </div>
+        </div>
+      </div>
+        <!-- end site header -->
+        
+      <div id="main_content" style="margin-bottom:20px">
+          {% block content %}
+            {% endblock %}
+        
+      <!-- end of main content -->
+      </div>
+      
+      <!-- site footer -->
+      <div id="footer">
+        <!-- footer image -->
+        <div id="footer_image">
+          &nbsp;
+        </div>
+        <!-- footer grass -->
+        <div id="footer_grass">
+          &nbsp;
+        </div>
+        <div id="footer_container">
+          <div id="footer_content">
+            <div id="footer_edit"></div>
+            <div id="copyright">
+            Copyright © 2005‒2014 <strong class="gnome_logo">The GNOME Project</strong><br />
+                <small>
+                    Free to share and remix: <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons CC-BY</a>.
+                    Optimized for standards.
+                    Hosted by <a href="http://www.canonical.com/">Canonical</a>.
+                    Powered by <a href="http://djangoproject.com/">Django</a>.
+                </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- End of footer -->
+  </div>
+  <!-- End of container --> 
 </body>
 </html>
