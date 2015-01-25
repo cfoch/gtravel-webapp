@@ -1,0 +1,51 @@
+==============================================================================
+USERT TYPES
+==============================================================================
+Applicant:
+  This is the person who wish to apply for a sponsorship.
+
+Travel Committee:
+  This is responsible for processing sponsorship requests for hackfests
+  and conferences.
+
+Administrative Assistant:
+  This is the person who makes the reimbursements of travel sponsorships
+
+Board
+  The Board sets the budget for each event.
+
+
+==============================================================================
+GTRAVEL PROCCESS
+==============================================================================
+1.  The <ADMIN> create a new event (including details as date, city, venue...).
+
+2.  The <BOARD> sets de budget for this event.
+
+3.  The <APPLICANT> applies for a sponsorship. It means he/she has to fill an
+    application form. The <APPLICANT> submit the event.
+
+    The @GTRAVEL-WEBAPP sets the application automatically as PENDING (status). 
+
+4.  The <TRAVEL COMMITTEE> reviews the application form.
+    If everything goes okay, the sponsorship is offered. The application form
+    is set to SPONSORSHIP OFFERED (status).
+    If the application is out of the budget, the <TRAVEL COMMITTEE> asks to the
+    applicant to reduce the amount of subsidy. The <APPLICANT> can accept,
+    request another amount, and, in these cases, if the <TRAVEL COMMITTEE>
+    agree, the sponsorship is offered and the application form is set to
+    SPONSORSHIP OFFERED (status). Otherwise, the sponsorship will be rejected
+    and the application form will be set to WITHDRAWN (status).
+
+5.  The applicant buys the flight tickets.
+
+6.  After the last day of the event, the <APPLICANT> can send his/her recipts of
+    flight tickets in a maximum of 2 weeks. Otherwise the system will assume
+    that the <APPLICANT> is resigning to the sponsorship and the
+    @GTRAVEL-WEBAPP will set the status of the application as WITHDRAWN.
+
+7.  When receipts are sent, the <TRAVEL COMMITTEE> review the receipts and send
+    them to the <ADMINISTRATIVE ASSISTANT>
+
+8.  The <ADMINISTRATIVE ASSISTANT> makes the reimbursement.
+    The @GTRAVEL-WEBAPP sets the application as COMPLETED (status).
