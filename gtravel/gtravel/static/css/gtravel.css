@@ -1,1 +1,47 @@
+form.application {
+  /*background-color: red;*/
+}
 
+input {
+  outline: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #3a7e92;
+  height: 36px;
+  width: 180px;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  padding: 1px 10px;
+}
+
+select {
+  outline: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #3a7e92;
+  height: 36px;
+  width: 180px;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  padding: 10px 10px;
+}
+
+textarea {
+  outline: none;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #3a7e92;
+  height: 150px;
+  width: 340px;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  padding: 10px 10px;
+}
+
+label {
+  display: inline;
+  float: left;
+}

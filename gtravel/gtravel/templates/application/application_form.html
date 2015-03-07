@@ -1,17 +1,115 @@
-{% block content %}
-
 <div class="row" style="margin-top:20px;">
-    <div class="col-sm-9 ">
-    <form class="form-horizontal" method="post" action="">
+  <div class="col-sm-9 ">
+    <form class="application form-horizontal" role="form" method="post" action="">
+      {% csrf_token %}
+      <div class="form-inline">
+        {{ form.employment.errors }}
+        <!--<label for="{{ form.employment.id_for_label }}">Employement: </label>-->
+        {{ form.employment }}
+      </div>
 
-    {% csrf_token %}
-    {% for field in form %}
-        <p>{{ field.label_tag }} {{ field }} </p>
-        <p>{{ field.errors }}</p>
-    {% endfor %}
-    <input class="btn btn-primary btn-sm" type="submit"/>
-</form>
-    </div>
+      <div class="form-inline ">
+        {{ form.gnome_projects }}
+      </div>
 
+      <div class="form-inline">
+        {{ form.membership_status.errors }}
+        {{ form.membership_status }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.roles.errors }}
+        <label for="{{ form.membership_status.id_for_label }}">Roles: </label>
+        {{ form.roles }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.date_of_arrival.errors }}
+        <label for="{{ form.date_of_arrival.id_for_label }}">Date Of Arrival: </label>
+        {{ form.date_of_arrival }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.date_of_departure.errors }}
+        <label for="{{ form.date_of_departure.id_for_label }}">Date Of Departure: </label>
+        {{ form.date_of_departure }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.statement_of_interest.errors }}
+        {{ form.statement_of_interest }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.years_using_gnome.errors }}
+        <label for="{{ form.years_using_gnome.id_for_label }}">Years Using GNOME: </label>
+        {{ form.years_using_gnome }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.travel_costse.errors }}
+        <label for="{{ form.travel_costs.id_for_label }}">Travel Costs: </label>
+        {{ form.travel_costs }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.travel_costse_description.errors }}
+        <label for="{{ form.travel_costs_description.id_for_label }}">Travel Costs Description: </label>
+        {{ form.travel_costs_description }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.travel_costs.errors }}
+        <label for="{{ form.travel_costs.id_for_label }}">Travel Costs: </label>
+        {{ form.travel_costs }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.travel_costs_description.errors }}
+        <label for="{{ form.travel_costs_description.id_for_label }}">Travel Costs Description: </label>
+        {{ form.travel_costs_description }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.lodging_costs.errors }}
+        <label for="{{ form.lodging_costs.id_for_label }}">Lodging Costs: </label>
+        {{ form.lodging_costs }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.lodging_costs_description.errors }}
+        <label for="{{ form.lodging_costs_description.id_for_label }}">Lodging Costs Description: </label>
+        {{ form.lodging_costs_description }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.other_costs.errors }}
+        <label for="{{ form.other_costs.id_for_label }}">Other Costs: </label>
+        {{ form.other_costs }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.other_costs_description.errors }}
+        <label for="{{ form.other_costs_description.id_for_label }}">Other Costs Description: </label>
+        {{ form.other_costs_description }}
+      </div>
+
+      <div class="form-inline">
+        {{ form.requested_subsidy_total.errors }}
+        <label for="{{ form.requested_subsidy_total.id_for_label }}">Requested Subsidy Total: </label>
+        {{ form.requested_subsidy_total }}
+      </div>
+
+      <input type="radio" name="cash" value="cash">
+      <label>Cash</label>
+      <input type="radio" name="banktransfer" value="banktransfer">
+      <label>Bank Transfer</label>
+      <input type="radio" name="paypal" value="paypal">
+      <label>Paypal</label>
+      <input type="radio" name="check" value="check">
+      <label>Check</label>
+
+      <input class="btn btn-primary btn-sm" type="submit"/>
+    </form>
+  </div>
 </div>
-{% endblock %}

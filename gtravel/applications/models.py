@@ -35,6 +35,7 @@ class Application(models.Model):
     MEMBERSHIP_STATUS_NO) = range(4)
 
     MEMBERSHIP_STATUS = (
+        ('', 'Membership status'),
         (0, 'Yes'),
         (1, 'Pending'),
         (2, 'Emeritus'),
